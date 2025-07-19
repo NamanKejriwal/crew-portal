@@ -180,33 +180,37 @@ export default function HRDashboard() {
     status: "Approved" | "Rejected",
     comments?: string,
   ) => {
+    const updatedExpense = {
+      status,
+      reviewedBy: hrUser.id,
+      reviewComments: comments,
+      reviewedAt: new Date().toISOString(),
+    };
+
     setDepartmentExpenses((prev) =>
       prev.map((expense) =>
-        expense.id === expenseId
-          ? {
-              ...expense,
-              status,
-              reviewedBy: hrUser.id,
-              reviewComments: comments,
-              reviewedAt: new Date().toISOString(),
-            }
-          : expense,
+        expense.id === expenseId ? { ...expense, ...updatedExpense } : expense,
       ),
     );
 
     // Update the global array as well
     const expenseIndex = expenseClaims.findIndex((e) => e.id === expenseId);
     if (expenseIndex !== -1) {
-      expenseClaims[expenseIndex].status = status;
-      expenseClaims[expenseIndex].reviewedBy = hrUser.id;
-      expenseClaims[expenseIndex].reviewComments = comments;
-      expenseClaims[expenseIndex].reviewedAt = new Date().toISOString();
+      Object.assign(expenseClaims[expenseIndex], updatedExpense);
 
       // If approved, add to salary slip as bonus
       if (status === "Approved") {
         const expense = expenseClaims[expenseIndex];
         updateSalaryWithExpense(expense.employeeId, expense.amount);
       }
+
+      // Emit event for real-time updates
+      eventSystem.emit(EVENTS.EXPENSE_STATUS_UPDATED, {
+        expenseId,
+        employeeId: expenseClaims[expenseIndex].employeeId,
+        status,
+        comments,
+      });
     }
   };
 
