@@ -55,8 +55,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   const isAuthenticated = user !== null;
-  const isHR = user && "role" in user && user.role === "hr";
-  const isEmployee = user && !("role" in user);
+  const isHR = user && "role" in user && (user as User).role === "hr";
+  const isEmployee =
+    user && "role" in user && (user as Employee).role === "Employee";
 
   const value: AuthContextType = {
     user,
