@@ -180,18 +180,26 @@ export default function HRDashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-white animate-fade-in">
       <Header />
 
       <main className="container mx-auto px-6 py-8">
-        <div className="flex items-center justify-between mb-8">
+        <div className="flex items-center justify-between mb-10 animate-slide-up">
           <div>
-            <h2 className="text-3xl font-bold text-gray-900">
+            <h2 className="text-4xl font-bold text-slate-900 tracking-tight">
               {hrUser.department} Department
             </h2>
-            <p className="text-gray-600">HR Management Dashboard</p>
+            <p className="text-slate-600 text-lg mt-2">
+              HR Management Dashboard
+            </p>
           </div>
-          <AddEmployeeModal onEmployeeAdded={handleEmployeeAdded} />
+          <div className="flex gap-3">
+            <TaskAssignmentModal
+              employees={departmentData.employees}
+              onTaskAssigned={handleTaskAssigned}
+            />
+            <AddEmployeeModal onEmployeeAdded={handleEmployeeAdded} />
+          </div>
         </div>
 
         {/* Stats Cards */}
