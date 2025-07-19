@@ -819,10 +819,11 @@ export default function HRDashboard() {
                             {report.comments}
                           </TableCell>
                           <TableCell>
-                            <Button variant="outline" size="sm">
-                              <FileText className="mr-1 h-3 w-3" />
-                              View Details
-                            </Button>
+                            <PerformanceDetailModal
+                              report={report}
+                              employee={employee!}
+                              onReportUpdated={handlePerformanceReportUpdate}
+                            />
                           </TableCell>
                         </TableRow>
                       );
