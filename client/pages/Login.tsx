@@ -55,9 +55,9 @@ export default function Login() {
             </div>
           </div>
 
-          <div className="space-y-10">
-            <div className="flex items-start gap-5">
-              <div className="bg-slate-100 p-3 rounded-xl flex-shrink-0 shadow-soft">
+          <div className="space-y-10 animate-slide-up-delay">
+            <div className="flex items-start gap-5 transition-all duration-500 hover:transform hover:scale-105">
+              <div className="bg-slate-100 p-3 rounded-xl flex-shrink-0 shadow-soft hover:shadow-medium transition-all duration-300">
                 <Building2 className="h-7 w-7 text-slate-700" />
               </div>
               <div className="text-left">
@@ -71,8 +71,8 @@ export default function Login() {
               </div>
             </div>
 
-            <div className="flex items-start gap-5">
-              <div className="bg-slate-100 p-3 rounded-xl flex-shrink-0 shadow-soft">
+            <div className="flex items-start gap-5 transition-all duration-500 hover:transform hover:scale-105">
+              <div className="bg-slate-100 p-3 rounded-xl flex-shrink-0 shadow-soft hover:shadow-medium transition-all duration-300">
                 <Lock className="h-7 w-7 text-slate-700" />
               </div>
               <div className="text-left">
@@ -86,8 +86,8 @@ export default function Login() {
               </div>
             </div>
 
-            <div className="flex items-start gap-5">
-              <div className="bg-slate-100 p-3 rounded-xl flex-shrink-0 shadow-soft">
+            <div className="flex items-start gap-5 transition-all duration-500 hover:transform hover:scale-105">
+              <div className="bg-slate-100 p-3 rounded-xl flex-shrink-0 shadow-soft hover:shadow-medium transition-all duration-300">
                 <Users className="h-7 w-7 text-slate-700" />
               </div>
               <div className="text-left">
