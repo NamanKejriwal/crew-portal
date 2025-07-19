@@ -21,7 +21,7 @@ import {
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { FileText, TrendingUp, Save, Edit } from "lucide-react";
-import { PerformanceReport, Employee, User } from "@shared/types";
+import { PerformanceReport, Employee, User } from "@shared/api";
 import { performanceReports } from "@shared/database";
 
 interface PerformanceDetailModalProps {
