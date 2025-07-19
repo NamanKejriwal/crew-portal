@@ -96,7 +96,7 @@ export default function TaskAssignmentModal({
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button className="bg-blue-600 hover:bg-blue-700">
+        <Button className="bg-slate-900 hover:bg-black">
           <Plus className="mr-2 h-4 w-4" />
           Assign Task
         </Button>
@@ -199,7 +199,7 @@ export default function TaskAssignmentModal({
             <Button
               type="submit"
               disabled={isLoading}
-              className="flex-1 bg-blue-600 hover:bg-blue-700"
+              className="flex-1 bg-slate-900 hover:bg-black"
             >
               {isLoading ? "Assigning..." : "Assign Task"}
             </Button>
