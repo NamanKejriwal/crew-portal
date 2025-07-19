@@ -535,9 +535,10 @@ export default function HRDashboard() {
                         </TableCell>
                         <TableCell>{employee.mobileNumber}</TableCell>
                         <TableCell>
-                          <Button variant="outline" size="sm">
-                            Edit
-                          </Button>
+                          <EmployeeEditModal
+                            employee={employee}
+                            onEmployeeUpdated={handleEmployeeUpdated}
+                          />
                         </TableCell>
                       </TableRow>
                     ))}
