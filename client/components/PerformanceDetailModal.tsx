@@ -175,7 +175,7 @@ export default function PerformanceDetailModal({
                 <Select
                   value={editData.rating}
                   onValueChange={(value) =>
-                    setEditData((prev) => ({ ...prev, rating: value }))
+                    setEditData((prev) => ({ ...prev, rating: value as any }))
                   }
                 >
                   <SelectTrigger className="bg-white/70 border-slate-200 rounded-xl">
