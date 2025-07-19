@@ -5,6 +5,7 @@ import {
   LeaveRequest,
   SalarySlip,
   PerformanceReport,
+  ExpenseClaim,
   Department,
 } from "./types";
 
