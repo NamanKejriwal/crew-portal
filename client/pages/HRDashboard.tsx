@@ -394,13 +394,49 @@ export default function HRDashboard() {
 
         {/* Main Content Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab}>
-          <TabsList className="grid w-full grid-cols-6">
-            <TabsTrigger value="overview">Overview</TabsTrigger>
-            <TabsTrigger value="employees">Employees</TabsTrigger>
-            <TabsTrigger value="tasks">Tasks</TabsTrigger>
-            <TabsTrigger value="leaves">Leave Requests</TabsTrigger>
-            <TabsTrigger value="payroll">Payroll</TabsTrigger>
-            <TabsTrigger value="performance">Performance</TabsTrigger>
+          <TabsList className="grid w-full grid-cols-7 bg-white/60 backdrop-blur-sm border-0 shadow-soft">
+            <TabsTrigger
+              value="overview"
+              className="data-[state=active]:bg-slate-800 data-[state=active]:text-white rounded-lg"
+            >
+              Overview
+            </TabsTrigger>
+            <TabsTrigger
+              value="employees"
+              className="data-[state=active]:bg-slate-800 data-[state=active]:text-white rounded-lg"
+            >
+              Employees
+            </TabsTrigger>
+            <TabsTrigger
+              value="tasks"
+              className="data-[state=active]:bg-slate-800 data-[state=active]:text-white rounded-lg"
+            >
+              Tasks
+            </TabsTrigger>
+            <TabsTrigger
+              value="leaves"
+              className="data-[state=active]:bg-slate-800 data-[state=active]:text-white rounded-lg"
+            >
+              Leaves
+            </TabsTrigger>
+            <TabsTrigger
+              value="expenses"
+              className="data-[state=active]:bg-slate-800 data-[state=active]:text-white rounded-lg"
+            >
+              Expenses
+            </TabsTrigger>
+            <TabsTrigger
+              value="payroll"
+              className="data-[state=active]:bg-slate-800 data-[state=active]:text-white rounded-lg"
+            >
+              Payroll
+            </TabsTrigger>
+            <TabsTrigger
+              value="performance"
+              className="data-[state=active]:bg-slate-800 data-[state=active]:text-white rounded-lg"
+            >
+              Performance
+            </TabsTrigger>
           </TabsList>
 
           <TabsContent value="overview" className="space-y-6">
