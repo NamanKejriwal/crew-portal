@@ -5,7 +5,7 @@ import React, {
   useEffect,
   ReactNode,
 } from "react";
-import { User, Employee, AuthContextType } from "@shared/types";
+import { User, Employee, AuthContextType } from "@shared/api";
 import { authenticateUser } from "@shared/database";
 
 const AuthContext = createContext<AuthContextType | null>(null);
