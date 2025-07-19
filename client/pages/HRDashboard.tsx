@@ -3,6 +3,7 @@ import { useAuth } from "@/hooks/use-auth";
 import Header from "@/components/Header";
 import AddEmployeeModal from "@/components/AddEmployeeModal";
 import TaskAssignmentModal from "@/components/TaskAssignmentModal";
+import PerformanceDetailModal from "@/components/PerformanceDetailModal";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -29,6 +30,7 @@ import {
   Download,
   Edit,
   Plus,
+  Receipt,
 } from "lucide-react";
 import {
   getEmployeesByDepartment,
@@ -36,10 +38,20 @@ import {
   getLeaveRequestsByDepartment,
   getSalarySlipsByDepartment,
   getPerformanceReportsByDepartment,
+  getExpenseClaimsByDepartment,
   tasks,
   leaveRequests,
+  expenseClaims,
+  salarySlips,
 } from "@shared/database";
-import { User, Employee, Task, LeaveRequest } from "@shared/types";
+import {
+  User,
+  Employee,
+  Task,
+  LeaveRequest,
+  ExpenseClaim,
+  PerformanceReport,
+} from "@shared/types";
 import { downloadSalarySlipPDF } from "@/utils/pdfGenerator";
 
 export default function HRDashboard() {
