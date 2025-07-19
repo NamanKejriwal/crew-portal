@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import AddEmployeeModal from "@/components/AddEmployeeModal";
 import TaskAssignmentModal from "@/components/TaskAssignmentModal";
 import PerformanceDetailModal from "@/components/PerformanceDetailModal";
+import EmployeeEditModal from "@/components/EmployeeEditModal";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
