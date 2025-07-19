@@ -130,6 +130,13 @@ export default function EmployeeDashboard() {
                 : expense,
             ),
           );
+
+          // Refresh salary data when expense status changes
+          if (data.status === "Approved") {
+            recalculateAllSalarySlips();
+            // Force a page refresh to show updated salary data
+            setTimeout(() => window.location.reload(), 1000);
+          }
         }
       },
     );
