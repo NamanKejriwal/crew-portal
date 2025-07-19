@@ -34,6 +34,7 @@ import {
 } from "@shared/database";
 import { Employee, Task, LeaveRequest, ExpenseClaim } from "@shared/api";
 import { downloadSalarySlipPDF } from "@/utils/pdfGenerator";
+import { eventSystem, EVENTS } from "@shared/eventSystem";
 
 export default function EmployeeDashboard() {
   const { user } = useAuth();
