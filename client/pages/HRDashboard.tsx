@@ -127,6 +127,8 @@ export default function HRDashboard() {
     setEmployees(getEmployeesByDepartment(hrUser.department));
     setDepartmentTasks(getTasksByDepartment(hrUser.department));
     setDepartmentLeaves(getLeaveRequestsByDepartment(hrUser.department));
+    setDepartmentExpenses(getExpenseClaimsByDepartment(hrUser.department));
+    setPerformanceReports(getPerformanceReportsByDepartment(hrUser.department));
   }, [hrUser.department]);
 
   const handleEmployeeAdded = (newEmployee: Employee) => {
