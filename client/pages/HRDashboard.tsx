@@ -141,10 +141,7 @@ export default function HRDashboard() {
             </h2>
             <p className="text-gray-600">HR Management Dashboard</p>
           </div>
-          <Button className="bg-blue-600 hover:bg-blue-700">
-            <UserPlus className="mr-2 h-4 w-4" />
-            Add Employee
-          </Button>
+          <AddEmployeeModal onEmployeeAdded={handleEmployeeAdded} />
         </div>
 
         {/* Stats Cards */}
