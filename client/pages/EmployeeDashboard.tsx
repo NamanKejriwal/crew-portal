@@ -260,12 +260,43 @@ export default function EmployeeDashboard() {
 
         {/* Main Content Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab}>
-          <TabsList className="grid w-full grid-cols-5">
-            <TabsTrigger value="overview">Overview</TabsTrigger>
-            <TabsTrigger value="profile">Profile</TabsTrigger>
-            <TabsTrigger value="tasks">My Tasks</TabsTrigger>
-            <TabsTrigger value="leaves">Leave History</TabsTrigger>
-            <TabsTrigger value="salary">Salary Slips</TabsTrigger>
+          <TabsList className="grid w-full grid-cols-6 bg-white/60 backdrop-blur-sm border-0 shadow-soft">
+            <TabsTrigger
+              value="overview"
+              className="data-[state=active]:bg-slate-800 data-[state=active]:text-white rounded-lg"
+            >
+              Overview
+            </TabsTrigger>
+            <TabsTrigger
+              value="profile"
+              className="data-[state=active]:bg-slate-800 data-[state=active]:text-white rounded-lg"
+            >
+              Profile
+            </TabsTrigger>
+            <TabsTrigger
+              value="tasks"
+              className="data-[state=active]:bg-slate-800 data-[state=active]:text-white rounded-lg"
+            >
+              My Tasks
+            </TabsTrigger>
+            <TabsTrigger
+              value="leaves"
+              className="data-[state=active]:bg-slate-800 data-[state=active]:text-white rounded-lg"
+            >
+              Leaves
+            </TabsTrigger>
+            <TabsTrigger
+              value="expenses"
+              className="data-[state=active]:bg-slate-800 data-[state=active]:text-white rounded-lg"
+            >
+              Expenses
+            </TabsTrigger>
+            <TabsTrigger
+              value="salary"
+              className="data-[state=active]:bg-slate-800 data-[state=active]:text-white rounded-lg"
+            >
+              Salary
+            </TabsTrigger>
           </TabsList>
 
           <TabsContent value="overview" className="space-y-6">
