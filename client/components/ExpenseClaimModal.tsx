@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/select";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Receipt } from "lucide-react";
-import { Employee, ExpenseClaim } from "@shared/types";
+import { Employee, ExpenseClaim } from "@shared/api";
 import { expenseClaims } from "@shared/database";
 
 interface ExpenseClaimModalProps {
