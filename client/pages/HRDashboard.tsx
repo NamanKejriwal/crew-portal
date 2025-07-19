@@ -51,7 +51,7 @@ import {
   LeaveRequest,
   ExpenseClaim,
   PerformanceReport,
-} from "@shared/types";
+} from "@shared/api";
 import { downloadSalarySlipPDF } from "@/utils/pdfGenerator";
 
 export default function HRDashboard() {
