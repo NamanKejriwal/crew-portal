@@ -19,7 +19,7 @@ import {
   X,
   Building2,
 } from "lucide-react";
-import { User as UserType, Employee } from "@shared/types";
+import { User as UserType, Employee } from "@shared/api";
 
 export default function Profile() {
   const { user, isHR, isEmployee } = useAuth();
