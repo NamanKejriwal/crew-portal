@@ -95,7 +95,7 @@ export default function LeaveApplicationModal({
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button className="bg-blue-600 hover:bg-blue-700">
+        <Button className="bg-slate-900 hover:bg-black">
           <CalendarPlus className="mr-2 h-4 w-4" />
           Apply for Leave
         </Button>
