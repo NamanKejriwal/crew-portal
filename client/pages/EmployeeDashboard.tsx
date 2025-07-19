@@ -40,6 +40,7 @@ export default function EmployeeDashboard() {
   const [activeTab, setActiveTab] = useState("overview");
   const [employeeTasks, setEmployeeTasks] = useState<Task[]>([]);
   const [employeeLeaves, setEmployeeLeaves] = useState<LeaveRequest[]>([]);
+  const [employeeExpenses, setEmployeeExpenses] = useState<ExpenseClaim[]>([]);
 
   const employee = user as Employee;
 
@@ -52,6 +53,10 @@ export default function EmployeeDashboard() {
       employeeLeaves.length > 0
         ? employeeLeaves
         : leaveRequests.filter((leave) => leave.employeeId === employee.id);
+    const currentExpenses =
+      employeeExpenses.length > 0
+        ? employeeExpenses
+        : expenseClaims.filter((expense) => expense.employeeId === employee.id);
     const employeeSalarySlips = salarySlips.filter(
       (slip) => slip.employeeId === employee.id,
     );
@@ -59,6 +64,7 @@ export default function EmployeeDashboard() {
     return {
       tasks: currentTasks,
       leaveRequests: currentLeaves,
+      expenseClaims: currentExpenses,
       salarySlips: employeeSalarySlips,
       stats: {
         assignedTasks: currentTasks.length,
@@ -70,9 +76,12 @@ export default function EmployeeDashboard() {
         approvedLeaves: currentLeaves.filter(
           (leave) => leave.status === "Approved",
         ).length,
+        pendingExpenses: currentExpenses.filter(
+          (expense) => expense.status === "Pending",
+        ).length,
       },
     };
-  }, [employee.id, employeeTasks, employeeLeaves]);
+  }, [employee.id, employeeTasks, employeeLeaves, employeeExpenses]);
 
   // Initialize data on component mount
   React.useEffect(() => {
