@@ -413,6 +413,57 @@ const salaryConfig = {
   },
 };
 
+// Sample expense claims (moved here to avoid initialization order issues)
+export let expenseClaims: ExpenseClaim[] = [
+  {
+    id: "exp-1",
+    employeeId: "EMP101",
+    title: "Client Meeting Lunch",
+    description:
+      "Business lunch with potential client for Q2 marketing campaign",
+    amount: 1200,
+    category: "Meals",
+    submittedAt: "2024-01-25T14:30:00Z",
+    status: "Pending",
+  },
+  {
+    id: "exp-2",
+    employeeId: "EMP102",
+    title: "Marketing Conference Travel",
+    description: "Flight tickets for Digital Marketing Summit 2024",
+    amount: 15000,
+    category: "Travel",
+    submittedAt: "2024-01-24T10:15:00Z",
+    status: "Approved",
+    reviewedBy: "hr-marketing",
+    reviewComments: "Approved for professional development",
+    reviewedAt: "2024-01-24T16:20:00Z",
+  },
+  {
+    id: "exp-3",
+    employeeId: "EMP201",
+    title: "Software License",
+    description: "Annual subscription for development tools",
+    amount: 8000,
+    category: "Software",
+    submittedAt: "2024-01-23T09:00:00Z",
+    status: "Approved",
+    reviewedBy: "hr-it",
+    reviewComments: "Essential for development work",
+    reviewedAt: "2024-01-23T14:45:00Z",
+  },
+  {
+    id: "exp-4",
+    employeeId: "EMP202",
+    title: "Team Building Activity",
+    description: "Quarterly team building event expenses",
+    amount: 3500,
+    category: "Other",
+    submittedAt: "2024-01-22T11:30:00Z",
+    status: "Pending",
+  },
+];
+
 // Function to calculate years of experience
 const calculateExperience = (joiningDate: string): number => {
   const joining = new Date(joiningDate);
