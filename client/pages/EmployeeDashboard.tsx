@@ -425,7 +425,12 @@ export default function EmployeeDashboard() {
                         </TableCell>
                         <TableCell>
                           {task.status === "Pending" && (
-                            <Button variant="outline" size="sm">
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => handleTaskComplete(task.id)}
+                              className="text-emerald-600 hover:text-emerald-700 border-emerald-200 hover:border-emerald-300"
+                            >
                               Mark as Done
                             </Button>
                           )}
