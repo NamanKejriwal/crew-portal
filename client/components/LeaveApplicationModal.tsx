@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/select";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { CalendarPlus } from "lucide-react";
-import { Employee, LeaveRequest } from "@shared/types";
+import { Employee, LeaveRequest } from "@shared/api";
 import { leaveRequests } from "@shared/database";
 
 interface LeaveApplicationModalProps {
