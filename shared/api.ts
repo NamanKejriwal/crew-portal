@@ -81,10 +81,17 @@ export interface SalarySlip {
   basicPay: number;
   hra: number;
   bonuses: number;
+  approvedExpenses: number; // Track approved expenses separately
   deductions: number;
   netPay: number;
   generatedBy: string; // HR user id
   generatedAt: string;
+  expenseDetails?: Array<{
+    expenseId: string;
+    title: string;
+    amount: number;
+    approvedAt: string;
+  }>; // Track individual expense details
 }
 
 // Team allocation interface
