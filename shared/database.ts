@@ -499,10 +499,12 @@ export let salarySlips: SalarySlip[] = employees.map((employee) => {
   };
 });
 
-// Function to update salary with approved expenses
+// Enhanced function to update salary with approved expenses
 export const updateSalaryWithExpense = (
   employeeId: string,
+  expenseId: string,
   expenseAmount: number,
+  expenseTitle: string,
 ) => {
   const employee = employees.find((emp) => emp.id === employeeId);
   if (!employee) return;
@@ -517,26 +519,75 @@ export const updateSalaryWithExpense = (
       slip.year === currentYear,
   );
 
+  const expenseDetail = {
+    expenseId,
+    title: expenseTitle,
+    amount: expenseAmount,
+    approvedAt: new Date().toISOString(),
+  };
+
   if (existingSlipIndex !== -1) {
     // Update existing slip
-    salarySlips[existingSlipIndex].bonuses += expenseAmount;
-    salarySlips[existingSlipIndex].netPay += expenseAmount;
+    const slip = salarySlips[existingSlipIndex];
+    slip.approvedExpenses += expenseAmount;
+    slip.netPay += expenseAmount;
+
+    // Add expense detail
+    if (!slip.expenseDetails) {
+      slip.expenseDetails = [];
+    }
+    slip.expenseDetails.push(expenseDetail);
   } else {
     // Create new salary slip with expense
-    const salary = calculateSalary(employee, expenseAmount);
+    const baseSalary = calculateBaseSalary(employee);
     const hrUser = hrUsers.find((hr) => hr.department === employee.department);
+
+    const netPay =
+      baseSalary.basicPay +
+      baseSalary.hra +
+      baseSalary.bonuses +
+      expenseAmount -
+      baseSalary.deductions;
 
     const newSlip: SalarySlip = {
       id: `salary-${employeeId}-${Date.now()}`,
       employeeId: employeeId,
       month: currentMonth,
       year: currentYear,
-      ...salary,
+      ...baseSalary,
+      approvedExpenses: expenseAmount,
+      expenseDetails: [expenseDetail],
+      netPay,
       generatedBy: hrUser?.id || "system",
       generatedAt: new Date().toISOString(),
     };
     salarySlips.push(newSlip);
   }
+};
+
+// Function to recalculate all salary slips dynamically
+export const recalculateAllSalarySlips = () => {
+  salarySlips.forEach((slip) => {
+    const employee = employees.find((emp) => emp.id === slip.employeeId);
+    if (!employee) return;
+
+    const baseSalary = calculateBaseSalary(employee);
+    const { total: approvedExpenses, details: expenseDetails } =
+      getApprovedExpensesForMonth(slip.employeeId, slip.month, slip.year);
+
+    // Update slip with recalculated values
+    Object.assign(slip, {
+      ...baseSalary,
+      approvedExpenses,
+      expenseDetails,
+      netPay:
+        baseSalary.basicPay +
+        baseSalary.hra +
+        baseSalary.bonuses +
+        approvedExpenses -
+        baseSalary.deductions,
+    });
+  });
 };
 
 // Sample performance reports
