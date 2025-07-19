@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from "react";
 import { useAuth } from "@/hooks/use-auth";
 import Header from "@/components/Header";
+import LeaveApplicationModal from "@/components/LeaveApplicationModal";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -24,7 +25,8 @@ import {
   CalendarPlus,
 } from "lucide-react";
 import { tasks, leaveRequests, salarySlips } from "@shared/database";
-import { Employee } from "@shared/types";
+import { Employee, Task, LeaveRequest } from "@shared/types";
+import { downloadSalarySlipPDF } from "@/utils/pdfGenerator";
 
 export default function EmployeeDashboard() {
   const { user } = useAuth();
