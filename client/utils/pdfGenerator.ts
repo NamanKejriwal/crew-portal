@@ -1,4 +1,4 @@
-import { SalarySlip, Employee } from "@shared/types";
+import { SalarySlip, Employee } from "@shared/api";
 
 export const generateSalarySlipPDF = (slip: SalarySlip, employee: Employee) => {
   // Create a simple HTML document for the salary slip
