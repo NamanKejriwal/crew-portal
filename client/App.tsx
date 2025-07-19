@@ -10,6 +10,7 @@ import { AuthProvider, useAuth } from "@/hooks/use-auth";
 
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
+import Profile from "./pages/Profile";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NotFound from "./pages/NotFound";
 
