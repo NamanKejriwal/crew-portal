@@ -177,7 +177,10 @@ export default function EmployeeDashboard() {
               Your personal workspace
             </p>
           </div>
-          <LeaveApplicationModal onLeaveApplied={handleLeaveApplied} />
+          <div className="flex gap-3">
+            <ExpenseClaimModal onExpenseSubmitted={handleExpenseSubmitted} />
+            <LeaveApplicationModal onLeaveApplied={handleLeaveApplied} />
+          </div>
         </div>
 
         {/* Stats Cards */}
