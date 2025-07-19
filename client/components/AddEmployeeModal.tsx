@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/select";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { UserPlus } from "lucide-react";
-import { Employee, User } from "@shared/types";
+import { Employee, User } from "@shared/api";
 import { employees } from "@shared/database";
 
 interface AddEmployeeModalProps {
