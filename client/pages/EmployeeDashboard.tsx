@@ -31,6 +31,7 @@ import {
   leaveRequests,
   salarySlips,
   expenseClaims,
+  recalculateAllSalarySlips,
 } from "@shared/database";
 import { Employee, Task, LeaveRequest, ExpenseClaim } from "@shared/api";
 import { downloadSalarySlipPDF } from "@/utils/pdfGenerator";
