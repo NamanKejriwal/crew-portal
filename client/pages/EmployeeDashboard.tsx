@@ -31,37 +31,78 @@ import { downloadSalarySlipPDF } from "@/utils/pdfGenerator";
 export default function EmployeeDashboard() {
   const { user } = useAuth();
   const [activeTab, setActiveTab] = useState("overview");
+  const [employeeTasks, setEmployeeTasks] = useState<Task[]>([]);
+  const [employeeLeaves, setEmployeeLeaves] = useState<LeaveRequest[]>([]);
 
   const employee = user as Employee;
 
   const employeeData = useMemo(() => {
-    const employeeTasks = tasks.filter(
-      (task) => task.employeeId === employee.id,
-    );
-    const employeeLeaves = leaveRequests.filter(
-      (leave) => leave.employeeId === employee.id,
-    );
+    const currentTasks =
+      employeeTasks.length > 0
+        ? employeeTasks
+        : tasks.filter((task) => task.employeeId === employee.id);
+    const currentLeaves =
+      employeeLeaves.length > 0
+        ? employeeLeaves
+        : leaveRequests.filter((leave) => leave.employeeId === employee.id);
     const employeeSalarySlips = salarySlips.filter(
       (slip) => slip.employeeId === employee.id,
     );
 
     return {
-      tasks: employeeTasks,
-      leaveRequests: employeeLeaves,
+      tasks: currentTasks,
+      leaveRequests: currentLeaves,
       salarySlips: employeeSalarySlips,
       stats: {
-        assignedTasks: employeeTasks.length,
-        completedTasks: employeeTasks.filter((task) => task.status === "Done")
+        assignedTasks: currentTasks.length,
+        completedTasks: currentTasks.filter((task) => task.status === "Done")
           .length,
-        pendingLeaveRequests: employeeLeaves.filter(
+        pendingLeaveRequests: currentLeaves.filter(
           (leave) => leave.status === "Pending",
         ).length,
-        approvedLeaves: employeeLeaves.filter(
+        approvedLeaves: currentLeaves.filter(
           (leave) => leave.status === "Approved",
         ).length,
       },
     };
+  }, [employee.id, employeeTasks, employeeLeaves]);
+
+  // Initialize data on component mount
+  React.useEffect(() => {
+    setEmployeeTasks(tasks.filter((task) => task.employeeId === employee.id));
+    setEmployeeLeaves(
+      leaveRequests.filter((leave) => leave.employeeId === employee.id),
+    );
   }, [employee.id]);
+
+  const handleTaskComplete = (taskId: string) => {
+    setEmployeeTasks((prev) =>
+      prev.map((task) =>
+        task.id === taskId
+          ? {
+              ...task,
+              status: "Done" as const,
+              updatedAt: new Date().toISOString(),
+            }
+          : task,
+      ),
+    );
+
+    // Update the global array as well
+    const taskIndex = tasks.findIndex((t) => t.id === taskId);
+    if (taskIndex !== -1) {
+      tasks[taskIndex].status = "Done";
+      tasks[taskIndex].updatedAt = new Date().toISOString();
+    }
+  };
+
+  const handleLeaveApplied = (newLeave: LeaveRequest) => {
+    setEmployeeLeaves((prev) => [...prev, newLeave]);
+  };
+
+  const handleDownloadSalarySlip = (slip: any) => {
+    downloadSalarySlipPDF(slip, employee);
+  };
 
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString("en-US", {
