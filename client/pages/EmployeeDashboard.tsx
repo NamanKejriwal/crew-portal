@@ -141,21 +141,20 @@ export default function EmployeeDashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-white animate-fade-in">
       <Header />
 
       <main className="container mx-auto px-6 py-8">
-        <div className="flex items-center justify-between mb-8">
+        <div className="flex items-center justify-between mb-10 animate-slide-up">
           <div>
-            <h2 className="text-3xl font-bold text-gray-900">
+            <h2 className="text-4xl font-bold text-slate-900 tracking-tight">
               Welcome, {employee.fullName}
             </h2>
-            <p className="text-gray-600">Your personal dashboard</p>
+            <p className="text-slate-600 text-lg mt-2">
+              Your personal workspace
+            </p>
           </div>
-          <Button className="bg-blue-600 hover:bg-blue-700">
-            <CalendarPlus className="mr-2 h-4 w-4" />
-            Apply for Leave
-          </Button>
+          <LeaveApplicationModal onLeaveApplied={handleLeaveApplied} />
         </div>
 
         {/* Stats Cards */}
