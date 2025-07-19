@@ -385,25 +385,90 @@ export let leaveRequests: LeaveRequest[] = [
   },
 ];
 
-// Salary configuration by department and role
+// Enhanced salary configuration by department with experience levels
 const salaryConfig = {
-  Marketing: { basePay: 50000, hraPercent: 0.4 },
-  IT: { basePay: 60000, hraPercent: 0.35 },
-  Finance: { basePay: 55000, hraPercent: 0.38 },
-  Research: { basePay: 65000, hraPercent: 0.32 },
+  Marketing: {
+    basePay: 50000,
+    hraPercent: 0.4,
+    bonusPercent: 0.1,
+    deductionPercent: 0.05,
+  },
+  IT: {
+    basePay: 60000,
+    hraPercent: 0.35,
+    bonusPercent: 0.12,
+    deductionPercent: 0.06,
+  },
+  Finance: {
+    basePay: 55000,
+    hraPercent: 0.38,
+    bonusPercent: 0.08,
+    deductionPercent: 0.05,
+  },
+  Research: {
+    basePay: 65000,
+    hraPercent: 0.32,
+    bonusPercent: 0.15,
+    deductionPercent: 0.07,
+  },
 };
 
-// Function to calculate salary based on employee data
-const calculateSalary = (employee: Employee, expenseBonus: number = 0) => {
-  const config = salaryConfig[employee.department];
-  const basicPay = config.basePay;
-  const hra = Math.round(basicPay * config.hraPercent);
-  const standardBonuses = Math.round(basicPay * 0.1); // 10% of basic pay
-  const totalBonuses = standardBonuses + expenseBonus;
-  const deductions = Math.round(basicPay * 0.05); // 5% deductions (tax, PF etc)
-  const netPay = basicPay + hra + totalBonuses - deductions;
+// Function to calculate years of experience
+const calculateExperience = (joiningDate: string): number => {
+  const joining = new Date(joiningDate);
+  const now = new Date();
+  return Math.floor(
+    (now.getTime() - joining.getTime()) / (1000 * 60 * 60 * 24 * 365),
+  );
+};
 
-  return { basicPay, hra, bonuses: totalBonuses, deductions, netPay };
+// Function to calculate salary based on employee data with experience adjustment
+const calculateBaseSalary = (employee: Employee) => {
+  const config = salaryConfig[employee.department];
+  const experience = calculateExperience(employee.joiningDate);
+
+  // Adjust base pay based on experience (5% increase per year, max 50%)
+  const experienceMultiplier = Math.min(1 + experience * 0.05, 1.5);
+  const adjustedBasePay = Math.round(config.basePay * experienceMultiplier);
+
+  const hra = Math.round(adjustedBasePay * config.hraPercent);
+  const standardBonuses = Math.round(adjustedBasePay * config.bonusPercent);
+  const deductions = Math.round(adjustedBasePay * config.deductionPercent);
+
+  return {
+    basicPay: adjustedBasePay,
+    hra,
+    bonuses: standardBonuses,
+    deductions,
+    approvedExpenses: 0, // Initialize with no expenses
+  };
+};
+
+// Function to get total approved expenses for an employee in a given month/year
+export const getApprovedExpensesForMonth = (
+  employeeId: string,
+  month: string,
+  year: number,
+): { total: number; details: any[] } => {
+  const monthExpenses = expenseClaims.filter(
+    (expense) =>
+      expense.employeeId === employeeId &&
+      expense.status === "Approved" &&
+      expense.reviewedAt &&
+      new Date(expense.reviewedAt).getMonth() ===
+        new Date(`${month} 1, ${year}`).getMonth() &&
+      new Date(expense.reviewedAt).getFullYear() === year,
+  );
+
+  const total = monthExpenses.reduce((sum, expense) => sum + expense.amount, 0);
+  const details = monthExpenses.map((expense) => ({
+    expenseId: expense.id,
+    title: expense.title,
+    amount: expense.amount,
+    approvedAt: expense.reviewedAt!,
+  }));
+
+  return { total, details };
 };
 
 // Generate salary slips for all employees
