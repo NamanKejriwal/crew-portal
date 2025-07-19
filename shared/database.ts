@@ -514,6 +514,16 @@ export const getSalarySlipsByDepartment = (
   return salarySlips.filter((slip) => employeeIds.includes(slip.employeeId));
 };
 
+export const getPerformanceReportsByDepartment = (
+  department: Department,
+): PerformanceReport[] => {
+  const deptEmployees = getEmployeesByDepartment(department);
+  const employeeIds = deptEmployees.map((emp) => emp.id);
+  return performanceReports.filter((report) =>
+    employeeIds.includes(report.employeeId),
+  );
+};
+
 export const authenticateUser = (
   email: string,
   password: string,
