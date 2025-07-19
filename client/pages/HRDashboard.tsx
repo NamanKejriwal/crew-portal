@@ -390,6 +390,24 @@ export default function HRDashboard() {
               </div>
             </CardContent>
           </Card>
+
+          <Card className="shadow-soft border-0 bg-white/60 backdrop-blur-sm transition-all duration-300 hover:shadow-medium">
+            <CardContent className="p-7">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm font-semibold text-slate-600 tracking-wide uppercase">
+                    Pending Expenses
+                  </p>
+                  <p className="text-3xl font-bold text-purple-600 mt-2">
+                    {departmentData.stats.pendingExpenses}
+                  </p>
+                </div>
+                <div className="bg-purple-100 p-3 rounded-xl">
+                  <Receipt className="h-8 w-8 text-purple-600" />
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         </div>
 
         {/* Main Content Tabs */}
