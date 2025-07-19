@@ -471,17 +471,29 @@ export const getApprovedExpensesForMonth = (
   return { total, details };
 };
 
-// Generate salary slips for all employees
+// Generate dynamic salary slips for all employees
 export let salarySlips: SalarySlip[] = employees.map((employee) => {
-  const salary = calculateSalary(employee);
+  const baseSalary = calculateBaseSalary(employee);
   const hrUser = hrUsers.find((hr) => hr.department === employee.department);
+  const { total: approvedExpenses, details: expenseDetails } =
+    getApprovedExpensesForMonth(employee.id, "January", 2024);
+
+  const netPay =
+    baseSalary.basicPay +
+    baseSalary.hra +
+    baseSalary.bonuses +
+    approvedExpenses -
+    baseSalary.deductions;
 
   return {
     id: `salary-${employee.id}`,
     employeeId: employee.id,
     month: "January",
     year: 2024,
-    ...salary,
+    ...baseSalary,
+    approvedExpenses,
+    expenseDetails,
+    netPay,
     generatedBy: hrUser?.id || "system",
     generatedAt: "2024-01-31T18:00:00Z",
   };
