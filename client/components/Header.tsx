@@ -45,7 +45,7 @@ export default function Header() {
     <header className="bg-white border-b border-gray-200 px-6 py-4">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="bg-blue-600 p-2 rounded-lg">
+          <div className="bg-slate-800 p-2 rounded-lg">
             <Users className="h-6 w-6 text-white" />
           </div>
           <div>
