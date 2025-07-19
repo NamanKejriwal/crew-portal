@@ -213,12 +213,13 @@ export default function HRDashboard() {
 
         {/* Main Content Tabs */}
         <Tabs value={activeTab} onValueChange={setActiveTab}>
-          <TabsList className="grid w-full grid-cols-5">
+          <TabsList className="grid w-full grid-cols-6">
             <TabsTrigger value="overview">Overview</TabsTrigger>
             <TabsTrigger value="employees">Employees</TabsTrigger>
             <TabsTrigger value="tasks">Tasks</TabsTrigger>
             <TabsTrigger value="leaves">Leave Requests</TabsTrigger>
             <TabsTrigger value="payroll">Payroll</TabsTrigger>
+            <TabsTrigger value="performance">Performance</TabsTrigger>
           </TabsList>
 
           <TabsContent value="overview" className="space-y-6">
