@@ -665,43 +665,100 @@ export default function EmployeeDashboard() {
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead>Month/Year</TableHead>
-                      <TableHead>Basic Pay</TableHead>
-                      <TableHead>HRA</TableHead>
-                      <TableHead>Bonuses</TableHead>
-                      <TableHead>Deductions</TableHead>
-                      <TableHead>Net Pay</TableHead>
-                      <TableHead>Actions</TableHead>
+                      <TableHead className="text-slate-700 font-semibold">
+                        Month/Year
+                      </TableHead>
+                      <TableHead className="text-slate-700 font-semibold">
+                        Basic Pay
+                      </TableHead>
+                      <TableHead className="text-slate-700 font-semibold">
+                        HRA
+                      </TableHead>
+                      <TableHead className="text-slate-700 font-semibold">
+                        Bonuses
+                      </TableHead>
+                      <TableHead className="text-slate-700 font-semibold">
+                        Approved Expenses
+                      </TableHead>
+                      <TableHead className="text-slate-700 font-semibold">
+                        Deductions
+                      </TableHead>
+                      <TableHead className="text-slate-700 font-semibold">
+                        Net Pay
+                      </TableHead>
+                      <TableHead className="text-slate-700 font-semibold">
+                        Actions
+                      </TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {employeeData.salarySlips.map((slip) => (
-                      <TableRow key={slip.id}>
-                        <TableCell className="font-medium">
-                          {slip.month} {slip.year}
-                        </TableCell>
-                        <TableCell>₹{slip.basicPay.toLocaleString()}</TableCell>
-                        <TableCell>₹{slip.hra.toLocaleString()}</TableCell>
-                        <TableCell>₹{slip.bonuses.toLocaleString()}</TableCell>
-                        <TableCell>
-                          ₹{slip.deductions.toLocaleString()}
-                        </TableCell>
-                        <TableCell className="font-medium">
-                          ₹{slip.netPay.toLocaleString()}
-                        </TableCell>
-                        <TableCell>
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            onClick={() => handleDownloadSalarySlip(slip)}
-                            className="hover:bg-slate-50"
-                          >
-                            <FileText className="mr-1 h-3 w-3" />
-                            Download PDF
-                          </Button>
-                        </TableCell>
-                      </TableRow>
-                    ))}
+                    {employeeData.salarySlips.map((slip) => {
+                      const slipWithExpenses = slip as any; // Type assertion for new fields
+                      return (
+                        <TableRow
+                          key={slip.id}
+                          className="hover:bg-slate-50/50"
+                        >
+                          <TableCell className="font-medium">
+                            {slip.month} {slip.year}
+                          </TableCell>
+                          <TableCell>
+                            ₹{slip.basicPay.toLocaleString()}
+                          </TableCell>
+                          <TableCell>₹{slip.hra.toLocaleString()}</TableCell>
+                          <TableCell>
+                            ₹{slip.bonuses.toLocaleString()}
+                          </TableCell>
+                          <TableCell>
+                            {slipWithExpenses.approvedExpenses > 0 ? (
+                              <div className="flex flex-col">
+                                <span className="font-semibold text-emerald-600">
+                                  ₹
+                                  {slipWithExpenses.approvedExpenses.toLocaleString()}
+                                </span>
+                                {slipWithExpenses.expenseDetails &&
+                                  slipWithExpenses.expenseDetails.length >
+                                    0 && (
+                                    <div className="text-xs text-slate-500 mt-1 space-y-1">
+                                      {slipWithExpenses.expenseDetails.map(
+                                        (expense: any, index: number) => (
+                                          <div
+                                            key={index}
+                                            className="truncate max-w-40"
+                                            title={expense.title}
+                                          >
+                                            • {expense.title}: ₹
+                                            {expense.amount.toLocaleString()}
+                                          </div>
+                                        ),
+                                      )}
+                                    </div>
+                                  )}
+                              </div>
+                            ) : (
+                              <span className="text-slate-400">₹0</span>
+                            )}
+                          </TableCell>
+                          <TableCell>
+                            ₹{slip.deductions.toLocaleString()}
+                          </TableCell>
+                          <TableCell className="font-medium text-emerald-600">
+                            ₹{slip.netPay.toLocaleString()}
+                          </TableCell>
+                          <TableCell>
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => handleDownloadSalarySlip(slip)}
+                              className="hover:bg-slate-50"
+                            >
+                              <FileText className="mr-1 h-3 w-3" />
+                              Download PDF
+                            </Button>
+                          </TableCell>
+                        </TableRow>
+                      );
+                    })}
                   </TableBody>
                 </Table>
               </CardContent>
