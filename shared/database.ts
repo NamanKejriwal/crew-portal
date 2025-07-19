@@ -645,6 +645,16 @@ export const getPerformanceReportsByDepartment = (
   );
 };
 
+export const getExpenseClaimsByDepartment = (
+  department: Department,
+): ExpenseClaim[] => {
+  const deptEmployees = getEmployeesByDepartment(department);
+  const employeeIds = deptEmployees.map((emp) => emp.id);
+  return expenseClaims.filter((claim) =>
+    employeeIds.includes(claim.employeeId),
+  );
+};
+
 export const authenticateUser = (
   email: string,
   password: string,
