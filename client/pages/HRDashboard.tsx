@@ -40,22 +40,30 @@ import { downloadSalarySlipPDF } from "@/utils/pdfGenerator";
 export default function HRDashboard() {
   const { user } = useAuth();
   const [activeTab, setActiveTab] = useState("overview");
+  const [employees, setEmployees] = useState<Employee[]>([]);
 
   const hrUser = user as User;
 
   const departmentData = useMemo(() => {
-    const employees = getEmployeesByDepartment(hrUser.department);
+    const currentEmployees =
+      employees.length > 0
+        ? employees
+        : getEmployeesByDepartment(hrUser.department);
     const tasks = getTasksByDepartment(hrUser.department);
     const leaveRequests = getLeaveRequestsByDepartment(hrUser.department);
     const salarySlips = getSalarySlipsByDepartment(hrUser.department);
+    const performanceReports = getPerformanceReportsByDepartment(
+      hrUser.department,
+    );
 
     return {
-      employees,
+      employees: currentEmployees,
       tasks,
       leaveRequests,
       salarySlips,
+      performanceReports,
       stats: {
-        totalEmployees: employees.length,
+        totalEmployees: currentEmployees.length,
         pendingLeaveRequests: leaveRequests.filter(
           (req) => req.status === "Pending",
         ).length,
@@ -63,7 +71,23 @@ export default function HRDashboard() {
         pendingTasks: tasks.filter((task) => task.status === "Pending").length,
       },
     };
+  }, [hrUser.department, employees]);
+
+  // Initialize employees on component mount
+  React.useEffect(() => {
+    setEmployees(getEmployeesByDepartment(hrUser.department));
   }, [hrUser.department]);
+
+  const handleEmployeeAdded = (newEmployee: Employee) => {
+    setEmployees((prev) => [...prev, newEmployee]);
+  };
+
+  const handleDownloadSalarySlip = (slip: any) => {
+    const employee = getEmployeeById(slip.employeeId);
+    if (employee) {
+      downloadSalarySlipPDF(slip, employee);
+    }
+  };
 
   const getEmployeeById = (employeeId: string) => {
     return departmentData.employees.find((emp) => emp.id === employeeId);
