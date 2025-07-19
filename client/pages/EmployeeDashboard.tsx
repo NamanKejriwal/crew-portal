@@ -543,6 +543,70 @@ export default function EmployeeDashboard() {
             </Card>
           </TabsContent>
 
+          <TabsContent value="expenses">
+            <Card className="shadow-soft border-0 bg-white/60 backdrop-blur-sm">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-slate-900">
+                  <Receipt className="h-5 w-5" />
+                  My Expense Claims
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead className="text-slate-700 font-semibold">
+                        Title
+                      </TableHead>
+                      <TableHead className="text-slate-700 font-semibold">
+                        Category
+                      </TableHead>
+                      <TableHead className="text-slate-700 font-semibold">
+                        Amount
+                      </TableHead>
+                      <TableHead className="text-slate-700 font-semibold">
+                        Submitted
+                      </TableHead>
+                      <TableHead className="text-slate-700 font-semibold">
+                        Status
+                      </TableHead>
+                      <TableHead className="text-slate-700 font-semibold">
+                        Comments
+                      </TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {employeeData.expenseClaims.map((expense) => (
+                      <TableRow
+                        key={expense.id}
+                        className="hover:bg-slate-50/50"
+                      >
+                        <TableCell className="font-medium">
+                          {expense.title}
+                        </TableCell>
+                        <TableCell>
+                          <Badge variant="outline" className="bg-slate-100">
+                            {expense.category}
+                          </Badge>
+                        </TableCell>
+                        <TableCell className="font-semibold">
+                          ₹{expense.amount.toLocaleString()}
+                        </TableCell>
+                        <TableCell>{formatDate(expense.submittedAt)}</TableCell>
+                        <TableCell>
+                          <Badge className={getStatusColor(expense.status)}>
+                            {expense.status}
+                          </Badge>
+                        </TableCell>
+                        <TableCell>{expense.reviewComments || "-"}</TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
           <TabsContent value="salary">
             <Card>
               <CardHeader>
