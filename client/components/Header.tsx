@@ -90,9 +90,14 @@ export default function Header() {
                 </div>
               </div>
               <DropdownMenuSeparator />
-              <DropdownMenuItem className="cursor-pointer">
-                <User className="mr-2 h-4 w-4" />
-                <span>Profile</span>
+              <DropdownMenuItem className="cursor-pointer p-0">
+                <Link
+                  to="/profile"
+                  className="flex items-center w-full px-2 py-1.5"
+                >
+                  <User className="mr-2 h-4 w-4" />
+                  <span>Profile</span>
+                </Link>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem
