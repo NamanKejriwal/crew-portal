@@ -213,6 +213,14 @@ export default function HRDashboard() {
     );
   };
 
+  const handleEmployeeUpdated = (updatedEmployee: Employee) => {
+    setEmployees((prev) =>
+      prev.map((employee) =>
+        employee.id === updatedEmployee.id ? updatedEmployee : employee,
+      ),
+    );
+  };
+
   const handleDownloadSalarySlip = (slip: any) => {
     const employee = getEmployeeById(slip.employeeId);
     if (employee) {
