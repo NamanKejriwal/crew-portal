@@ -523,7 +523,12 @@ export default function EmployeeDashboard() {
                           ₹{slip.netPay.toLocaleString()}
                         </TableCell>
                         <TableCell>
-                          <Button variant="outline" size="sm">
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => handleDownloadSalarySlip(slip)}
+                            className="hover:bg-slate-50"
+                          >
                             <FileText className="mr-1 h-3 w-3" />
                             Download PDF
                           </Button>
