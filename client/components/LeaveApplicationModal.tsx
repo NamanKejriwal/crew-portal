@@ -183,7 +183,7 @@ export default function LeaveApplicationModal({
             <Button
               type="submit"
               disabled={isLoading}
-              className="flex-1 bg-blue-600 hover:bg-blue-700"
+              className="flex-1 bg-slate-900 hover:bg-black"
             >
               {isLoading ? "Applying..." : "Apply for Leave"}
             </Button>
