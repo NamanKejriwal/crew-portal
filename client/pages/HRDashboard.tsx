@@ -55,6 +55,7 @@ import {
   PerformanceReport,
 } from "@shared/api";
 import { downloadSalarySlipPDF } from "@/utils/pdfGenerator";
+import { eventSystem, EVENTS } from "@shared/eventSystem";
 
 export default function HRDashboard() {
   const { user } = useAuth();
