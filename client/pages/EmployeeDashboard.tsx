@@ -93,6 +93,51 @@ export default function EmployeeDashboard() {
     setEmployeeExpenses(
       expenseClaims.filter((expense) => expense.employeeId === employee.id),
     );
+
+    // Subscribe to real-time updates
+    const unsubscribeLeave = eventSystem.subscribe(
+      EVENTS.LEAVE_STATUS_UPDATED,
+      (data) => {
+        if (data.employeeId === employee.id) {
+          setEmployeeLeaves((prev) =>
+            prev.map((leave) =>
+              leave.id === data.leaveId
+                ? {
+                    ...leave,
+                    status: data.status,
+                    reviewComments: data.comments,
+                  }
+                : leave,
+            ),
+          );
+        }
+      },
+    );
+
+    const unsubscribeExpense = eventSystem.subscribe(
+      EVENTS.EXPENSE_STATUS_UPDATED,
+      (data) => {
+        if (data.employeeId === employee.id) {
+          setEmployeeExpenses((prev) =>
+            prev.map((expense) =>
+              expense.id === data.expenseId
+                ? {
+                    ...expense,
+                    status: data.status,
+                    reviewComments: data.comments,
+                  }
+                : expense,
+            ),
+          );
+        }
+      },
+    );
+
+    // Cleanup subscriptions
+    return () => {
+      unsubscribeLeave();
+      unsubscribeExpense();
+    };
   }, [employee.id]);
 
   const handleTaskComplete = (taskId: string) => {
