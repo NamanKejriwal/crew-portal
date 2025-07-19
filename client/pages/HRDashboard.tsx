@@ -318,7 +318,7 @@ export default function HRDashboard() {
         </div>
 
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10 animate-slide-up">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 mb-10 animate-slide-up">
           <Card className="shadow-soft border-0 bg-white/60 backdrop-blur-sm transition-all duration-300 hover:shadow-medium">
             <CardContent className="p-7">
               <div className="flex items-center justify-between">
