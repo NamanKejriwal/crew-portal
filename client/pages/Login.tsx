@@ -37,12 +37,12 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 flex items-center justify-center p-4 animate-fade-in">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 animate-gradient flex items-center justify-center p-4 animate-fade-in">
       <div className="w-full max-w-7xl grid lg:grid-cols-2 gap-16 items-center">
         {/* Left side - Branding */}
         <div className="text-center lg:text-left space-y-10 lg:pr-12 animate-slide-up">
           <div className="flex items-center justify-center lg:justify-start gap-5">
-            <div className="bg-gradient-to-r from-slate-800 to-slate-900 p-4 rounded-2xl shadow-strong">
+            <div className="bg-gradient-to-r from-slate-800 to-slate-900 p-4 rounded-2xl shadow-strong animate-pulse-slow animate-float">
               <Users className="h-10 w-10 text-white" />
             </div>
             <div>
