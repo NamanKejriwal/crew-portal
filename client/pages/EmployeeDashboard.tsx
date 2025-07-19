@@ -32,7 +32,7 @@ import {
   salarySlips,
   expenseClaims,
 } from "@shared/database";
-import { Employee, Task, LeaveRequest, ExpenseClaim } from "@shared/types";
+import { Employee, Task, LeaveRequest, ExpenseClaim } from "@shared/api";
 import { downloadSalarySlipPDF } from "@/utils/pdfGenerator";
 
 export default function EmployeeDashboard() {
