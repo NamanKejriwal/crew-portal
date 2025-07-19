@@ -7,7 +7,7 @@ import {
   PerformanceReport,
   ExpenseClaim,
   Department,
-} from "./types";
+} from "./api";
 
 // HR Users (one per department)
 export const hrUsers: User[] = [
