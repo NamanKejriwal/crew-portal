@@ -484,6 +484,126 @@ export let performanceReports: PerformanceReport[] = [
   },
 ];
 
+// Sample expense claims
+export let expenseClaims: ExpenseClaim[] = [
+  {
+    id: "exp-1",
+    employeeId: "EMP101",
+    title: "Client Meeting Lunch",
+    description:
+      "Business lunch with potential client for Q2 marketing campaign",
+    amount: 1200,
+    category: "Meals",
+    submittedAt: "2024-01-25T14:30:00Z",
+    status: "Pending",
+  },
+  {
+    id: "exp-2",
+    employeeId: "EMP102",
+    title: "Marketing Conference Travel",
+    description: "Flight tickets for Digital Marketing Summit 2024",
+    amount: 15000,
+    category: "Travel",
+    submittedAt: "2024-01-24T10:15:00Z",
+    status: "Approved",
+    reviewedBy: "hr-marketing",
+    reviewComments: "Approved for professional development",
+    reviewedAt: "2024-01-24T16:20:00Z",
+  },
+  {
+    id: "exp-3",
+    employeeId: "EMP201",
+    title: "Software License",
+    description: "Annual subscription for development tools",
+    amount: 8000,
+    category: "Software",
+    submittedAt: "2024-01-23T09:00:00Z",
+    status: "Approved",
+    reviewedBy: "hr-it",
+    reviewComments: "Essential for development work",
+    reviewedAt: "2024-01-23T14:45:00Z",
+  },
+  {
+    id: "exp-4",
+    employeeId: "EMP202",
+    title: "Team Building Activity",
+    description: "Quarterly team building event expenses",
+    amount: 3500,
+    category: "Other",
+    submittedAt: "2024-01-22T11:30:00Z",
+    status: "Pending",
+  },
+];
+
+// Add more performance reports for all employees
+performanceReports.push(
+  {
+    id: "perf-6",
+    employeeId: "EMP104",
+    reviewPeriod: "Q1 2024",
+    tasksCompleted: 9,
+    totalTasks: 10,
+    completionRate: 90,
+    rating: "Excellent",
+    comments:
+      "Consistently delivers high-quality work. Shows great initiative and leadership potential.",
+    reviewedBy: "hr-marketing",
+    reviewDate: "2024-01-31T10:00:00Z",
+  },
+  {
+    id: "perf-7",
+    employeeId: "EMP105",
+    reviewPeriod: "Q1 2024",
+    tasksCompleted: 7,
+    totalTasks: 9,
+    completionRate: 78,
+    rating: "Good",
+    comments:
+      "Good performance for a new employee. Shows enthusiasm and willingness to learn.",
+    reviewedBy: "hr-marketing",
+    reviewDate: "2024-01-31T10:00:00Z",
+  },
+  {
+    id: "perf-8",
+    employeeId: "EMP203",
+    reviewPeriod: "Q1 2024",
+    tasksCompleted: 11,
+    totalTasks: 13,
+    completionRate: 85,
+    rating: "Good",
+    comments:
+      "Solid technical skills. Good problem-solving abilities and team collaboration.",
+    reviewedBy: "hr-it",
+    reviewDate: "2024-01-31T10:00:00Z",
+  },
+  {
+    id: "perf-9",
+    employeeId: "EMP204",
+    reviewPeriod: "Q1 2024",
+    tasksCompleted: 8,
+    totalTasks: 10,
+    completionRate: 80,
+    rating: "Good",
+    comments:
+      "Reliable team member with good attention to detail. Meets all deadlines consistently.",
+    reviewedBy: "hr-it",
+    reviewDate: "2024-01-31T10:00:00Z",
+  },
+  {
+    id: "perf-10",
+    employeeId: "EMP205",
+    reviewPeriod: "Q1 2024",
+    tasksCompleted: 6,
+    totalTasks: 8,
+    completionRate: 75,
+    rating: "Average",
+    comments:
+      "Decent performance but has room for improvement in meeting deadlines.",
+    reviewedBy: "hr-it",
+    reviewDate: "2024-01-31T10:00:00Z",
+  },
+);
+
 // Helper functions to filter data by department
 export const getEmployeesByDepartment = (
   department: Department,
