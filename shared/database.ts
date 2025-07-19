@@ -414,6 +414,75 @@ export let salarySlips: SalarySlip[] = [
   },
 ];
 
+// Sample performance reports
+export let performanceReports: PerformanceReport[] = [
+  {
+    id: "perf-1",
+    employeeId: "EMP101",
+    reviewPeriod: "Q1 2024",
+    tasksCompleted: 8,
+    totalTasks: 10,
+    completionRate: 80,
+    rating: "Good",
+    comments:
+      "Consistently delivers quality work on time. Shows good initiative in marketing campaigns.",
+    reviewedBy: "hr-marketing",
+    reviewDate: "2024-01-31T10:00:00Z",
+  },
+  {
+    id: "perf-2",
+    employeeId: "EMP102",
+    reviewPeriod: "Q1 2024",
+    tasksCompleted: 12,
+    totalTasks: 12,
+    completionRate: 100,
+    rating: "Excellent",
+    comments:
+      "Outstanding performance. Exceeded expectations in all assigned tasks and showed leadership qualities.",
+    reviewedBy: "hr-marketing",
+    reviewDate: "2024-01-31T10:00:00Z",
+  },
+  {
+    id: "perf-3",
+    employeeId: "EMP103",
+    reviewPeriod: "Q1 2024",
+    tasksCompleted: 6,
+    totalTasks: 8,
+    completionRate: 75,
+    rating: "Average",
+    comments:
+      "Good effort but needs improvement in meeting deadlines. Has potential for growth.",
+    reviewedBy: "hr-marketing",
+    reviewDate: "2024-01-31T10:00:00Z",
+  },
+  {
+    id: "perf-4",
+    employeeId: "EMP201",
+    reviewPeriod: "Q1 2024",
+    tasksCompleted: 15,
+    totalTasks: 16,
+    completionRate: 94,
+    rating: "Excellent",
+    comments:
+      "Exceptional technical skills and problem-solving abilities. Great mentor to junior developers.",
+    reviewedBy: "hr-it",
+    reviewDate: "2024-01-31T10:00:00Z",
+  },
+  {
+    id: "perf-5",
+    employeeId: "EMP202",
+    reviewPeriod: "Q1 2024",
+    tasksCompleted: 10,
+    totalTasks: 12,
+    completionRate: 83,
+    rating: "Good",
+    comments:
+      "Solid technical contributor with good attention to detail. Reliable team member.",
+    reviewedBy: "hr-it",
+    reviewDate: "2024-01-31T10:00:00Z",
+  },
+];
+
 // Helper functions to filter data by department
 export const getEmployeesByDepartment = (
   department: Department,
