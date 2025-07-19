@@ -385,35 +385,82 @@ export let leaveRequests: LeaveRequest[] = [
   },
 ];
 
-// Sample salary slips
-export let salarySlips: SalarySlip[] = [
-  {
-    id: "salary-1",
-    employeeId: "EMP101",
+// Salary configuration by department and role
+const salaryConfig = {
+  Marketing: { basePay: 50000, hraPercent: 0.4 },
+  IT: { basePay: 60000, hraPercent: 0.35 },
+  Finance: { basePay: 55000, hraPercent: 0.38 },
+  Research: { basePay: 65000, hraPercent: 0.32 },
+};
+
+// Function to calculate salary based on employee data
+const calculateSalary = (employee: Employee, expenseBonus: number = 0) => {
+  const config = salaryConfig[employee.department];
+  const basicPay = config.basePay;
+  const hra = Math.round(basicPay * config.hraPercent);
+  const standardBonuses = Math.round(basicPay * 0.1); // 10% of basic pay
+  const totalBonuses = standardBonuses + expenseBonus;
+  const deductions = Math.round(basicPay * 0.05); // 5% deductions (tax, PF etc)
+  const netPay = basicPay + hra + totalBonuses - deductions;
+
+  return { basicPay, hra, bonuses: totalBonuses, deductions, netPay };
+};
+
+// Generate salary slips for all employees
+export let salarySlips: SalarySlip[] = employees.map((employee) => {
+  const salary = calculateSalary(employee);
+  const hrUser = hrUsers.find((hr) => hr.department === employee.department);
+
+  return {
+    id: `salary-${employee.id}`,
+    employeeId: employee.id,
     month: "January",
     year: 2024,
-    basicPay: 50000,
-    hra: 20000,
-    bonuses: 5000,
-    deductions: 3000,
-    netPay: 72000,
-    generatedBy: "hr-marketing",
+    ...salary,
+    generatedBy: hrUser?.id || "system",
     generatedAt: "2024-01-31T18:00:00Z",
-  },
-  {
-    id: "salary-2",
-    employeeId: "EMP102",
-    month: "January",
-    year: 2024,
-    basicPay: 55000,
-    hra: 22000,
-    bonuses: 8000,
-    deductions: 4000,
-    netPay: 81000,
-    generatedBy: "hr-marketing",
-    generatedAt: "2024-01-31T18:00:00Z",
-  },
-];
+  };
+});
+
+// Function to update salary with approved expenses
+export const updateSalaryWithExpense = (
+  employeeId: string,
+  expenseAmount: number,
+) => {
+  const employee = employees.find((emp) => emp.id === employeeId);
+  if (!employee) return;
+
+  const currentMonth = new Date().toLocaleString("default", { month: "long" });
+  const currentYear = new Date().getFullYear();
+
+  const existingSlipIndex = salarySlips.findIndex(
+    (slip) =>
+      slip.employeeId === employeeId &&
+      slip.month === currentMonth &&
+      slip.year === currentYear,
+  );
+
+  if (existingSlipIndex !== -1) {
+    // Update existing slip
+    salarySlips[existingSlipIndex].bonuses += expenseAmount;
+    salarySlips[existingSlipIndex].netPay += expenseAmount;
+  } else {
+    // Create new salary slip with expense
+    const salary = calculateSalary(employee, expenseAmount);
+    const hrUser = hrUsers.find((hr) => hr.department === employee.department);
+
+    const newSlip: SalarySlip = {
+      id: `salary-${employeeId}-${Date.now()}`,
+      employeeId: employeeId,
+      month: currentMonth,
+      year: currentYear,
+      ...salary,
+      generatedBy: hrUser?.id || "system",
+      generatedAt: new Date().toISOString(),
+    };
+    salarySlips.push(newSlip);
+  }
+};
 
 // Sample performance reports
 export let performanceReports: PerformanceReport[] = [
