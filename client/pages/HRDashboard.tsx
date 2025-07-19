@@ -203,67 +203,75 @@ export default function HRDashboard() {
         </div>
 
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <Card>
-            <CardContent className="p-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10 animate-slide-up">
+          <Card className="shadow-soft border-0 bg-white/60 backdrop-blur-sm transition-all duration-300 hover:shadow-medium">
+            <CardContent className="p-7">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-gray-600">
+                  <p className="text-sm font-semibold text-slate-600 tracking-wide uppercase">
                     Total Employees
                   </p>
-                  <p className="text-3xl font-bold text-gray-900">
+                  <p className="text-3xl font-bold text-slate-900 mt-2">
                     {departmentData.stats.totalEmployees}
                   </p>
                 </div>
-                <Users className="h-12 w-12 text-blue-600" />
+                <div className="bg-slate-100 p-3 rounded-xl">
+                  <Users className="h-8 w-8 text-slate-700" />
+                </div>
               </div>
             </CardContent>
           </Card>
 
-          <Card>
-            <CardContent className="p-6">
+          <Card className="shadow-soft border-0 bg-white/60 backdrop-blur-sm transition-all duration-300 hover:shadow-medium">
+            <CardContent className="p-7">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-gray-600">
-                    Pending Leave Requests
+                  <p className="text-sm font-semibold text-slate-600 tracking-wide uppercase">
+                    Pending Leaves
                   </p>
-                  <p className="text-3xl font-bold text-orange-600">
+                  <p className="text-3xl font-bold text-amber-600 mt-2">
                     {departmentData.stats.pendingLeaveRequests}
                   </p>
                 </div>
-                <AlertCircle className="h-12 w-12 text-orange-600" />
+                <div className="bg-amber-100 p-3 rounded-xl">
+                  <AlertCircle className="h-8 w-8 text-amber-600" />
+                </div>
               </div>
             </CardContent>
           </Card>
 
-          <Card>
-            <CardContent className="p-6">
+          <Card className="shadow-soft border-0 bg-white/60 backdrop-blur-sm transition-all duration-300 hover:shadow-medium">
+            <CardContent className="p-7">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-gray-600">
+                  <p className="text-sm font-semibold text-slate-600 tracking-wide uppercase">
                     Completed Tasks
                   </p>
-                  <p className="text-3xl font-bold text-green-600">
+                  <p className="text-3xl font-bold text-emerald-600 mt-2">
                     {departmentData.stats.completedTasks}
                   </p>
                 </div>
-                <CheckCircle className="h-12 w-12 text-green-600" />
+                <div className="bg-emerald-100 p-3 rounded-xl">
+                  <CheckCircle className="h-8 w-8 text-emerald-600" />
+                </div>
               </div>
             </CardContent>
           </Card>
 
-          <Card>
-            <CardContent className="p-6">
+          <Card className="shadow-soft border-0 bg-white/60 backdrop-blur-sm transition-all duration-300 hover:shadow-medium">
+            <CardContent className="p-7">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-gray-600">
+                  <p className="text-sm font-semibold text-slate-600 tracking-wide uppercase">
                     Pending Tasks
                   </p>
-                  <p className="text-3xl font-bold text-blue-600">
+                  <p className="text-3xl font-bold text-slate-900 mt-2">
                     {departmentData.stats.pendingTasks}
                   </p>
                 </div>
-                <Clock className="h-12 w-12 text-blue-600" />
+                <div className="bg-slate-100 p-3 rounded-xl">
+                  <Clock className="h-8 w-8 text-slate-700" />
+                </div>
               </div>
             </CardContent>
           </Card>
