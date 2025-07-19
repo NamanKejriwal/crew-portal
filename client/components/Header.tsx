@@ -27,9 +27,6 @@ export default function Header() {
   };
 
   const getUserName = () => {
-    if ("fullName" in user) {
-      return user.fullName;
-    }
     return user.fullName;
   };
 
