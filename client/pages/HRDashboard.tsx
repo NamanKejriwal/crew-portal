@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from "react";
 import { useAuth } from "@/hooks/use-auth";
 import Header from "@/components/Header";
+import AddEmployeeModal from "@/components/AddEmployeeModal";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -23,14 +24,18 @@ import {
   AlertCircle,
   CheckCircle,
   Clock,
+  FileText,
+  Download,
 } from "lucide-react";
 import {
   getEmployeesByDepartment,
   getTasksByDepartment,
   getLeaveRequestsByDepartment,
   getSalarySlipsByDepartment,
+  getPerformanceReportsByDepartment,
 } from "@shared/database";
-import { User } from "@shared/types";
+import { User, Employee } from "@shared/types";
+import { downloadSalarySlipPDF } from "@/utils/pdfGenerator";
 
 export default function HRDashboard() {
   const { user } = useAuth();
