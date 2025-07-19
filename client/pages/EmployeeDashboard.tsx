@@ -2,6 +2,7 @@ import React, { useState, useMemo } from "react";
 import { useAuth } from "@/hooks/use-auth";
 import Header from "@/components/Header";
 import LeaveApplicationModal from "@/components/LeaveApplicationModal";
+import ExpenseClaimModal from "@/components/ExpenseClaimModal";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -23,9 +24,15 @@ import {
   Clock,
   FileText,
   CalendarPlus,
+  Receipt,
 } from "lucide-react";
-import { tasks, leaveRequests, salarySlips } from "@shared/database";
-import { Employee, Task, LeaveRequest } from "@shared/types";
+import {
+  tasks,
+  leaveRequests,
+  salarySlips,
+  expenseClaims,
+} from "@shared/database";
+import { Employee, Task, LeaveRequest, ExpenseClaim } from "@shared/types";
 import { downloadSalarySlipPDF } from "@/utils/pdfGenerator";
 
 export default function EmployeeDashboard() {
