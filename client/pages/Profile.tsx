@@ -116,7 +116,7 @@ export default function Profile() {
             {isEmployee && !isEditing && (
               <Button
                 onClick={() => setIsEditing(true)}
-                className="bg-blue-600 hover:bg-blue-700"
+                className="bg-slate-900 hover:bg-black"
               >
                 <Edit className="mr-2 h-4 w-4" />
                 Edit Profile
@@ -135,7 +135,7 @@ export default function Profile() {
                 <Button
                   onClick={handleSave}
                   disabled={isSaving}
-                  className="bg-blue-600 hover:bg-blue-700"
+                  className="bg-slate-900 hover:bg-black"
                 >
                   <Save className="mr-2 h-4 w-4" />
                   {isSaving ? "Saving..." : "Save Changes"}
