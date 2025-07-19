@@ -202,7 +202,15 @@ export default function HRDashboard() {
       // If approved, add to salary slip as bonus
       if (status === "Approved") {
         const expense = expenseClaims[expenseIndex];
-        updateSalaryWithExpense(expense.employeeId, expense.amount);
+        updateSalaryWithExpense(
+          expense.employeeId,
+          expense.id,
+          expense.amount,
+          expense.title,
+        );
+
+        // Recalculate all salary slips to ensure consistency
+        recalculateAllSalarySlips();
       }
 
       // Emit event for real-time updates
