@@ -44,6 +44,7 @@ import {
   leaveRequests,
   expenseClaims,
   salarySlips,
+  updateSalaryWithExpense,
 } from "@shared/database";
 import {
   User,
