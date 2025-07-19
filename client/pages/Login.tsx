@@ -37,66 +37,66 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-100 flex items-center justify-center p-4">
-      <div className="w-full max-w-7xl grid lg:grid-cols-2 gap-12 items-center">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 flex items-center justify-center p-4 animate-fade-in">
+      <div className="w-full max-w-7xl grid lg:grid-cols-2 gap-16 items-center">
         {/* Left side - Branding */}
-        <div className="text-center lg:text-left space-y-8 lg:pr-8">
-          <div className="flex items-center justify-center lg:justify-start gap-4">
-            <div className="bg-blue-600 p-3 rounded-xl shadow-lg">
-              <Users className="h-8 w-8 text-white" />
+        <div className="text-center lg:text-left space-y-10 lg:pr-12 animate-slide-up">
+          <div className="flex items-center justify-center lg:justify-start gap-5">
+            <div className="bg-gradient-to-r from-slate-800 to-slate-900 p-4 rounded-2xl shadow-strong">
+              <Users className="h-10 w-10 text-white" />
             </div>
             <div>
-              <h1 className="text-4xl lg:text-5xl font-bold text-gray-900">
+              <h1 className="text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight">
                 Crew Portal
               </h1>
-              <p className="text-blue-600 font-medium text-lg">
-                HR Management System
+              <p className="text-slate-600 font-medium text-xl mt-2">
+                Modern HR Management
               </p>
             </div>
           </div>
 
-          <div className="space-y-8">
-            <div className="flex items-start gap-4">
-              <div className="bg-blue-100 p-2 rounded-lg flex-shrink-0">
-                <Building2 className="h-6 w-6 text-blue-600" />
+          <div className="space-y-10">
+            <div className="flex items-start gap-5">
+              <div className="bg-slate-100 p-3 rounded-xl flex-shrink-0 shadow-soft">
+                <Building2 className="h-7 w-7 text-slate-700" />
               </div>
               <div className="text-left">
-                <h3 className="font-semibold text-gray-900 text-lg mb-2">
+                <h3 className="font-semibold text-slate-900 text-xl mb-3">
                   Departmental Data Segregation
                 </h3>
-                <p className="text-gray-600 leading-relaxed">
-                  Secure access with strict departmental boundaries for HR
-                  operations.
+                <p className="text-slate-600 leading-relaxed text-lg">
+                  Enterprise-grade security with strict departmental boundaries
+                  for sensitive HR operations.
                 </p>
               </div>
             </div>
 
-            <div className="flex items-start gap-4">
-              <div className="bg-blue-100 p-2 rounded-lg flex-shrink-0">
-                <Lock className="h-6 w-6 text-blue-600" />
+            <div className="flex items-start gap-5">
+              <div className="bg-slate-100 p-3 rounded-xl flex-shrink-0 shadow-soft">
+                <Lock className="h-7 w-7 text-slate-700" />
               </div>
               <div className="text-left">
-                <h3 className="font-semibold text-gray-900 text-lg mb-2">
-                  Role-Based Access
+                <h3 className="font-semibold text-slate-900 text-xl mb-3">
+                  Role-Based Access Control
                 </h3>
-                <p className="text-gray-600 leading-relaxed">
-                  Tailored dashboards for HR administrators and employee
-                  self-service.
+                <p className="text-slate-600 leading-relaxed text-lg">
+                  Intelligently designed dashboards with granular permissions
+                  for administrators and employees.
                 </p>
               </div>
             </div>
 
-            <div className="flex items-start gap-4">
-              <div className="bg-blue-100 p-2 rounded-lg flex-shrink-0">
-                <Users className="h-6 w-6 text-blue-600" />
+            <div className="flex items-start gap-5">
+              <div className="bg-slate-100 p-3 rounded-xl flex-shrink-0 shadow-soft">
+                <Users className="h-7 w-7 text-slate-700" />
               </div>
               <div className="text-left">
-                <h3 className="font-semibold text-gray-900 text-lg mb-2">
-                  Comprehensive Management
+                <h3 className="font-semibold text-slate-900 text-xl mb-3">
+                  Complete HR Suite
                 </h3>
-                <p className="text-gray-600 leading-relaxed">
-                  Complete HR tools for employee management, tasks, leaves, and
-                  payroll.
+                <p className="text-slate-600 leading-relaxed text-lg">
+                  Comprehensive tools for workforce management, performance
+                  tracking, and organizational growth.
                 </p>
               </div>
             </div>
@@ -104,52 +104,52 @@ export default function Login() {
         </div>
 
         {/* Right side - Login form */}
-        <div className="w-full max-w-md mx-auto lg:mx-0 lg:ml-auto">
-          <Card className="shadow-2xl border-0 bg-white/95 backdrop-blur">
-            <CardHeader className="text-center pb-6">
-              <CardTitle className="text-2xl font-bold text-gray-900">
+        <div className="w-full max-w-md mx-auto lg:mx-0 lg:ml-auto animate-scale-in">
+          <Card className="shadow-strong border-0 bg-white/80 backdrop-blur-sm">
+            <CardHeader className="text-center pb-8 pt-10">
+              <CardTitle className="text-3xl font-bold text-slate-900 mb-2">
                 Welcome Back
               </CardTitle>
-              <p className="text-gray-600">Sign in to your account</p>
+              <p className="text-slate-600 text-lg">Access your workspace</p>
             </CardHeader>
-            <CardContent className="space-y-6">
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="space-y-2">
+            <CardContent className="px-10 pb-10">
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="space-y-3">
                   <Label
                     htmlFor="email"
-                    className="text-sm font-medium text-gray-700"
+                    className="text-sm font-semibold text-slate-700"
                   >
                     Email Address
                   </Label>
                   <div className="relative">
-                    <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                    <Mail className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-slate-400" />
                     <Input
                       id="email"
                       type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="pl-10 h-11"
-                      placeholder="Enter your email"
+                      className="pl-12 h-12 bg-white/50 border-slate-200 focus:border-slate-400 focus:ring-2 focus:ring-slate-200 rounded-xl"
+                      placeholder="your.email@company.com"
                       required
                     />
                   </div>
                 </div>
 
-                <div className="space-y-2">
+                <div className="space-y-3">
                   <Label
                     htmlFor="password"
-                    className="text-sm font-medium text-gray-700"
+                    className="text-sm font-semibold text-slate-700"
                   >
                     Password
                   </Label>
                   <div className="relative">
-                    <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+                    <Lock className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-slate-400" />
                     <Input
                       id="password"
                       type="password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      className="pl-10 h-11"
+                      className="pl-12 h-12 bg-white/50 border-slate-200 focus:border-slate-400 focus:ring-2 focus:ring-slate-200 rounded-xl"
                       placeholder="Enter your password"
                       required
                     />
@@ -157,39 +157,31 @@ export default function Login() {
                 </div>
 
                 {error && (
-                  <Alert variant="destructive">
-                    <AlertDescription>{error}</AlertDescription>
+                  <Alert
+                    variant="destructive"
+                    className="bg-red-50 border-red-200"
+                  >
+                    <AlertDescription className="text-red-800">
+                      {error}
+                    </AlertDescription>
                   </Alert>
                 )}
 
                 <Button
                   type="submit"
-                  className="w-full bg-blue-600 hover:bg-blue-700 h-11 text-base font-medium"
+                  className="w-full bg-gradient-to-r from-slate-800 to-slate-900 hover:from-slate-900 hover:to-slate-800 h-12 text-base font-semibold rounded-xl shadow-medium transition-all duration-300 hover:shadow-strong"
                   disabled={isLoading}
                 >
-                  {isLoading ? "Signing in..." : "Sign In"}
+                  {isLoading ? (
+                    <div className="flex items-center gap-2">
+                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      Signing in...
+                    </div>
+                  ) : (
+                    "Sign In"
+                  )}
                 </Button>
               </form>
-
-              <div className="pt-4 border-t border-gray-200">
-                <p className="text-sm font-medium text-gray-700 mb-3">
-                  Demo Credentials:
-                </p>
-                <div className="grid gap-2 max-h-48 overflow-y-auto">
-                  {sampleCredentials.map((cred, index) => (
-                    <button
-                      key={index}
-                      onClick={() => fillCredentials(cred.email, cred.password)}
-                      className="text-left p-3 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors text-sm border border-gray-200 hover:border-gray-300"
-                    >
-                      <div className="font-medium text-gray-900 mb-1">
-                        {cred.role} - {cred.department}
-                      </div>
-                      <div className="text-gray-600 text-xs">{cred.email}</div>
-                    </button>
-                  ))}
-                </div>
-              </div>
             </CardContent>
           </Card>
         </div>
