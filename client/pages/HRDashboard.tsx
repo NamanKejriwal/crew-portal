@@ -168,6 +168,85 @@ export default function HRDashboard() {
     }
   };
 
+  const handleExpenseStatusUpdate = (
+    expenseId: string,
+    status: "Approved" | "Rejected",
+    comments?: string,
+  ) => {
+    setDepartmentExpenses((prev) =>
+      prev.map((expense) =>
+        expense.id === expenseId
+          ? {
+              ...expense,
+              status,
+              reviewedBy: hrUser.id,
+              reviewComments: comments,
+              reviewedAt: new Date().toISOString(),
+            }
+          : expense,
+      ),
+    );
+
+    // Update the global array as well
+    const expenseIndex = expenseClaims.findIndex((e) => e.id === expenseId);
+    if (expenseIndex !== -1) {
+      expenseClaims[expenseIndex].status = status;
+      expenseClaims[expenseIndex].reviewedBy = hrUser.id;
+      expenseClaims[expenseIndex].reviewComments = comments;
+      expenseClaims[expenseIndex].reviewedAt = new Date().toISOString();
+
+      // If approved, add to salary slip as bonus
+      if (status === "Approved") {
+        const expense = expenseClaims[expenseIndex];
+        const employee = getEmployeeById(expense.employeeId);
+        if (employee) {
+          const currentMonth = new Date().toLocaleString("default", {
+            month: "long",
+          });
+          const currentYear = new Date().getFullYear();
+
+          // Check if salary slip exists for current month
+          const existingSlipIndex = salarySlips.findIndex(
+            (slip) =>
+              slip.employeeId === employee.id &&
+              slip.month === currentMonth &&
+              slip.year === currentYear,
+          );
+
+          if (existingSlipIndex !== -1) {
+            // Update existing slip
+            salarySlips[existingSlipIndex].bonuses += expense.amount;
+            salarySlips[existingSlipIndex].netPay += expense.amount;
+          } else {
+            // Create new salary slip with expense
+            const newSlip = {
+              id: `salary-${Date.now()}`,
+              employeeId: employee.id,
+              month: currentMonth,
+              year: currentYear,
+              basicPay: 50000, // Default basic pay
+              hra: 20000, // Default HRA
+              bonuses: expense.amount,
+              deductions: 3000, // Default deductions
+              netPay: 67000 + expense.amount, // Basic calculation
+              generatedBy: hrUser.id,
+              generatedAt: new Date().toISOString(),
+            };
+            salarySlips.push(newSlip);
+          }
+        }
+      }
+    }
+  };
+
+  const handlePerformanceReportUpdate = (updatedReport: PerformanceReport) => {
+    setPerformanceReports((prev) =>
+      prev.map((report) =>
+        report.id === updatedReport.id ? updatedReport : report,
+      ),
+    );
+  };
+
   const handleDownloadSalarySlip = (slip: any) => {
     const employee = getEmployeeById(slip.employeeId);
     if (employee) {
