@@ -89,6 +89,9 @@ export default function EmployeeDashboard() {
     setEmployeeLeaves(
       leaveRequests.filter((leave) => leave.employeeId === employee.id),
     );
+    setEmployeeExpenses(
+      expenseClaims.filter((expense) => expense.employeeId === employee.id),
+    );
   }, [employee.id]);
 
   const handleTaskComplete = (taskId: string) => {
@@ -114,6 +117,10 @@ export default function EmployeeDashboard() {
 
   const handleLeaveApplied = (newLeave: LeaveRequest) => {
     setEmployeeLeaves((prev) => [...prev, newLeave]);
+  };
+
+  const handleExpenseSubmitted = (newExpense: ExpenseClaim) => {
+    setEmployeeExpenses((prev) => [...prev, newExpense]);
   };
 
   const handleDownloadSalarySlip = (slip: any) => {
