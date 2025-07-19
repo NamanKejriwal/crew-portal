@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/select";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Plus } from "lucide-react";
-import { Employee, User, Task } from "@shared/types";
+import { Employee, User, Task } from "@shared/api";
 import { tasks } from "@shared/database";
 
 interface TaskAssignmentModalProps {
