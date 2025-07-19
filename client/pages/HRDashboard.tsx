@@ -488,8 +488,91 @@ export default function HRDashboard() {
                           <TableCell>₹{slip.hra.toLocaleString()}</TableCell>
                           <TableCell>₹{slip.netPay.toLocaleString()}</TableCell>
                           <TableCell>
-                            <Button variant="outline" size="sm">
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => handleDownloadSalarySlip(slip)}
+                            >
+                              <FileText className="mr-1 h-3 w-3" />
                               View PDF
+                            </Button>
+                          </TableCell>
+                        </TableRow>
+                      );
+                    })}
+                  </TableBody>
+                </Table>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="performance">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <TrendingUp className="h-5 w-5" />
+                  Performance Reports
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Employee</TableHead>
+                      <TableHead>Review Period</TableHead>
+                      <TableHead>Tasks Completed</TableHead>
+                      <TableHead>Completion Rate</TableHead>
+                      <TableHead>Rating</TableHead>
+                      <TableHead>Comments</TableHead>
+                      <TableHead>Actions</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {departmentData.performanceReports.map((report) => {
+                      const employee = getEmployeeById(report.employeeId);
+                      const getRatingColor = (rating: string) => {
+                        switch (rating) {
+                          case "Excellent":
+                            return "bg-green-100 text-green-800";
+                          case "Good":
+                            return "bg-blue-100 text-blue-800";
+                          case "Average":
+                            return "bg-yellow-100 text-yellow-800";
+                          case "Below Average":
+                            return "bg-orange-100 text-orange-800";
+                          case "Poor":
+                            return "bg-red-100 text-red-800";
+                          default:
+                            return "bg-gray-100 text-gray-800";
+                        }
+                      };
+
+                      return (
+                        <TableRow key={report.id}>
+                          <TableCell className="font-medium">
+                            {employee?.fullName}
+                          </TableCell>
+                          <TableCell>{report.reviewPeriod}</TableCell>
+                          <TableCell>
+                            {report.tasksCompleted}/{report.totalTasks}
+                          </TableCell>
+                          <TableCell>
+                            <Badge variant="outline">
+                              {report.completionRate}%
+                            </Badge>
+                          </TableCell>
+                          <TableCell>
+                            <Badge className={getRatingColor(report.rating)}>
+                              {report.rating}
+                            </Badge>
+                          </TableCell>
+                          <TableCell className="max-w-xs truncate">
+                            {report.comments}
+                          </TableCell>
+                          <TableCell>
+                            <Button variant="outline" size="sm">
+                              <FileText className="mr-1 h-3 w-3" />
+                              View Details
                             </Button>
                           </TableCell>
                         </TableRow>
