@@ -146,13 +146,37 @@ export const generateSalarySlipPDF = (slip: SalarySlip, employee: Employee) => {
                         <td>House Rent Allowance (HRA)</td>
                         <td class="amount earnings">${slip.hra.toLocaleString()}</td>
                     </tr>
-                    <tr>
+                                        <tr>
                         <td>Bonuses & Incentives</td>
                         <td class="amount earnings">${slip.bonuses.toLocaleString()}</td>
                     </tr>
+                    ${
+                      (slip as any).approvedExpenses > 0
+                        ? `
+                    <tr>
+                        <td>Approved Expenses</td>
+                        <td class="amount earnings">${(slip as any).approvedExpenses.toLocaleString()}</td>
+                    </tr>
+                    ${
+                      (slip as any).expenseDetails &&
+                      (slip as any).expenseDetails.length > 0
+                        ? (slip as any).expenseDetails
+                            .map(
+                              (expense: any) => `
+                        <tr style="font-size: 12px; color: #666;">
+                            <td style="padding-left: 20px;">• ${expense.title}</td>
+                            <td class="amount">₹${expense.amount.toLocaleString()}</td>
+                        </tr>
+                      `,
+                            )
+                            .join("")
+                        : ""
+                    }`
+                        : ""
+                    }
                     <tr>
                         <td><strong>Gross Earnings</strong></td>
-                        <td class="amount earnings"><strong>${(slip.basicPay + slip.hra + slip.bonuses).toLocaleString()}</strong></td>
+                        <td class="amount earnings"><strong>${(slip.basicPay + slip.hra + slip.bonuses + ((slip as any).approvedExpenses || 0)).toLocaleString()}</strong></td>
                     </tr>
                     <tr>
                         <td>Deductions (Tax, PF, etc.)</td>
