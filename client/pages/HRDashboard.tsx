@@ -46,6 +46,8 @@ export default function HRDashboard() {
   const { user } = useAuth();
   const [activeTab, setActiveTab] = useState("overview");
   const [employees, setEmployees] = useState<Employee[]>([]);
+  const [departmentTasks, setDepartmentTasks] = useState<Task[]>([]);
+  const [departmentLeaves, setDepartmentLeaves] = useState<LeaveRequest[]>([]);
 
   const hrUser = user as User;
 
@@ -54,8 +56,14 @@ export default function HRDashboard() {
       employees.length > 0
         ? employees
         : getEmployeesByDepartment(hrUser.department);
-    const tasks = getTasksByDepartment(hrUser.department);
-    const leaveRequests = getLeaveRequestsByDepartment(hrUser.department);
+    const currentTasks =
+      departmentTasks.length > 0
+        ? departmentTasks
+        : getTasksByDepartment(hrUser.department);
+    const currentLeaves =
+      departmentLeaves.length > 0
+        ? departmentLeaves
+        : getLeaveRequestsByDepartment(hrUser.department);
     const salarySlips = getSalarySlipsByDepartment(hrUser.department);
     const performanceReports = getPerformanceReportsByDepartment(
       hrUser.department,
@@ -63,28 +71,65 @@ export default function HRDashboard() {
 
     return {
       employees: currentEmployees,
-      tasks,
-      leaveRequests,
+      tasks: currentTasks,
+      leaveRequests: currentLeaves,
       salarySlips,
       performanceReports,
       stats: {
         totalEmployees: currentEmployees.length,
-        pendingLeaveRequests: leaveRequests.filter(
+        pendingLeaveRequests: currentLeaves.filter(
           (req) => req.status === "Pending",
         ).length,
-        completedTasks: tasks.filter((task) => task.status === "Done").length,
-        pendingTasks: tasks.filter((task) => task.status === "Pending").length,
+        completedTasks: currentTasks.filter((task) => task.status === "Done")
+          .length,
+        pendingTasks: currentTasks.filter((task) => task.status === "Pending")
+          .length,
       },
     };
-  }, [hrUser.department, employees]);
+  }, [hrUser.department, employees, departmentTasks, departmentLeaves]);
 
-  // Initialize employees on component mount
+  // Initialize data on component mount
   React.useEffect(() => {
     setEmployees(getEmployeesByDepartment(hrUser.department));
+    setDepartmentTasks(getTasksByDepartment(hrUser.department));
+    setDepartmentLeaves(getLeaveRequestsByDepartment(hrUser.department));
   }, [hrUser.department]);
 
   const handleEmployeeAdded = (newEmployee: Employee) => {
     setEmployees((prev) => [...prev, newEmployee]);
+  };
+
+  const handleTaskAssigned = (newTask: Task) => {
+    setDepartmentTasks((prev) => [...prev, newTask]);
+  };
+
+  const handleLeaveStatusUpdate = (
+    leaveId: string,
+    status: "Approved" | "Rejected",
+    comments?: string,
+  ) => {
+    setDepartmentLeaves((prev) =>
+      prev.map((leave) =>
+        leave.id === leaveId
+          ? {
+              ...leave,
+              status,
+              reviewedBy: hrUser.id,
+              reviewComments: comments,
+              reviewedAt: new Date().toISOString(),
+            }
+          : leave,
+      ),
+    );
+
+    // Update the global array as well
+    const leaveIndex = leaveRequests.findIndex((l) => l.id === leaveId);
+    if (leaveIndex !== -1) {
+      leaveRequests[leaveIndex].status = status;
+      leaveRequests[leaveIndex].reviewedBy = hrUser.id;
+      leaveRequests[leaveIndex].reviewComments = comments;
+      leaveRequests[leaveIndex].reviewedAt = new Date().toISOString();
+    }
   };
 
   const handleDownloadSalarySlip = (slip: any) => {
