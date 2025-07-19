@@ -705,19 +705,41 @@ export default function HRDashboard() {
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead>Employee</TableHead>
-                      <TableHead>Month/Year</TableHead>
-                      <TableHead>Basic Pay</TableHead>
-                      <TableHead>HRA</TableHead>
-                      <TableHead>Net Pay</TableHead>
-                      <TableHead>Actions</TableHead>
+                      <TableHead className="text-slate-700 font-semibold">
+                        Employee
+                      </TableHead>
+                      <TableHead className="text-slate-700 font-semibold">
+                        Month/Year
+                      </TableHead>
+                      <TableHead className="text-slate-700 font-semibold">
+                        Basic Pay
+                      </TableHead>
+                      <TableHead className="text-slate-700 font-semibold">
+                        HRA
+                      </TableHead>
+                      <TableHead className="text-slate-700 font-semibold">
+                        Bonuses
+                      </TableHead>
+                      <TableHead className="text-slate-700 font-semibold">
+                        Expenses
+                      </TableHead>
+                      <TableHead className="text-slate-700 font-semibold">
+                        Net Pay
+                      </TableHead>
+                      <TableHead className="text-slate-700 font-semibold">
+                        Actions
+                      </TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
                     {departmentData.salarySlips.map((slip) => {
                       const employee = getEmployeeById(slip.employeeId);
+                      const slipWithExpenses = slip as any; // Type assertion for new fields
                       return (
-                        <TableRow key={slip.id}>
+                        <TableRow
+                          key={slip.id}
+                          className="hover:bg-slate-50/50"
+                        >
                           <TableCell className="font-medium">
                             {employee?.fullName}
                           </TableCell>
@@ -728,12 +750,36 @@ export default function HRDashboard() {
                             ₹{slip.basicPay.toLocaleString()}
                           </TableCell>
                           <TableCell>₹{slip.hra.toLocaleString()}</TableCell>
-                          <TableCell>₹{slip.netPay.toLocaleString()}</TableCell>
+                          <TableCell>
+                            ₹{slip.bonuses.toLocaleString()}
+                          </TableCell>
+                          <TableCell>
+                            {slipWithExpenses.approvedExpenses > 0 ? (
+                              <div className="flex flex-col">
+                                <span className="font-semibold text-emerald-600">
+                                  ₹
+                                  {slipWithExpenses.approvedExpenses.toLocaleString()}
+                                </span>
+                                {slipWithExpenses.expenseDetails && (
+                                  <span className="text-xs text-slate-500">
+                                    {slipWithExpenses.expenseDetails.length}{" "}
+                                    expense(s)
+                                  </span>
+                                )}
+                              </div>
+                            ) : (
+                              <span className="text-slate-400">₹0</span>
+                            )}
+                          </TableCell>
+                          <TableCell className="font-semibold">
+                            ₹{slip.netPay.toLocaleString()}
+                          </TableCell>
                           <TableCell>
                             <Button
                               variant="outline"
                               size="sm"
                               onClick={() => handleDownloadSalarySlip(slip)}
+                              className="hover:bg-slate-50"
                             >
                               <FileText className="mr-1 h-3 w-3" />
                               View PDF
