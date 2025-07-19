@@ -147,27 +147,31 @@ export default function HRDashboard() {
     status: "Approved" | "Rejected",
     comments?: string,
   ) => {
+    const updatedLeave = {
+      status,
+      reviewedBy: hrUser.id,
+      reviewComments: comments,
+      reviewedAt: new Date().toISOString(),
+    };
+
     setDepartmentLeaves((prev) =>
       prev.map((leave) =>
-        leave.id === leaveId
-          ? {
-              ...leave,
-              status,
-              reviewedBy: hrUser.id,
-              reviewComments: comments,
-              reviewedAt: new Date().toISOString(),
-            }
-          : leave,
+        leave.id === leaveId ? { ...leave, ...updatedLeave } : leave,
       ),
     );
 
     // Update the global array as well
     const leaveIndex = leaveRequests.findIndex((l) => l.id === leaveId);
     if (leaveIndex !== -1) {
-      leaveRequests[leaveIndex].status = status;
-      leaveRequests[leaveIndex].reviewedBy = hrUser.id;
-      leaveRequests[leaveIndex].reviewComments = comments;
-      leaveRequests[leaveIndex].reviewedAt = new Date().toISOString();
+      Object.assign(leaveRequests[leaveIndex], updatedLeave);
+
+      // Emit event for real-time updates
+      eventSystem.emit(EVENTS.LEAVE_STATUS_UPDATED, {
+        leaveId,
+        employeeId: leaveRequests[leaveIndex].employeeId,
+        status,
+        comments,
+      });
     }
   };
 
