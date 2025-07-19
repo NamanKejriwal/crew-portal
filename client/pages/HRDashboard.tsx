@@ -60,6 +60,12 @@ export default function HRDashboard() {
   const [employees, setEmployees] = useState<Employee[]>([]);
   const [departmentTasks, setDepartmentTasks] = useState<Task[]>([]);
   const [departmentLeaves, setDepartmentLeaves] = useState<LeaveRequest[]>([]);
+  const [departmentExpenses, setDepartmentExpenses] = useState<ExpenseClaim[]>(
+    [],
+  );
+  const [performanceReports, setPerformanceReports] = useState<
+    PerformanceReport[]
+  >([]);
 
   const hrUser = user as User;
 
@@ -76,17 +82,23 @@ export default function HRDashboard() {
       departmentLeaves.length > 0
         ? departmentLeaves
         : getLeaveRequestsByDepartment(hrUser.department);
-    const salarySlips = getSalarySlipsByDepartment(hrUser.department);
-    const performanceReports = getPerformanceReportsByDepartment(
-      hrUser.department,
-    );
+    const currentExpenses =
+      departmentExpenses.length > 0
+        ? departmentExpenses
+        : getExpenseClaimsByDepartment(hrUser.department);
+    const currentReports =
+      performanceReports.length > 0
+        ? performanceReports
+        : getPerformanceReportsByDepartment(hrUser.department);
+    const departmentSalarySlips = getSalarySlipsByDepartment(hrUser.department);
 
     return {
       employees: currentEmployees,
       tasks: currentTasks,
       leaveRequests: currentLeaves,
-      salarySlips,
-      performanceReports,
+      expenseClaims: currentExpenses,
+      salarySlips: departmentSalarySlips,
+      performanceReports: currentReports,
       stats: {
         totalEmployees: currentEmployees.length,
         pendingLeaveRequests: currentLeaves.filter(
@@ -96,9 +108,19 @@ export default function HRDashboard() {
           .length,
         pendingTasks: currentTasks.filter((task) => task.status === "Pending")
           .length,
+        pendingExpenses: currentExpenses.filter(
+          (exp) => exp.status === "Pending",
+        ).length,
       },
     };
-  }, [hrUser.department, employees, departmentTasks, departmentLeaves]);
+  }, [
+    hrUser.department,
+    employees,
+    departmentTasks,
+    departmentLeaves,
+    departmentExpenses,
+    performanceReports,
+  ]);
 
   // Initialize data on component mount
   React.useEffect(() => {
