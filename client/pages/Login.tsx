@@ -36,38 +36,6 @@ export default function Login() {
     }
   };
 
-  const sampleCredentials = [
-    {
-      role: "HR",
-      department: "Marketing",
-      email: "hr.marketing@hrportal.com",
-      password: "marketing@123",
-    },
-    {
-      role: "HR",
-      department: "IT",
-      email: "hr.it@hrportal.com",
-      password: "it@123",
-    },
-    {
-      role: "Employee",
-      department: "Marketing",
-      email: "ananya@hrportal.com",
-      password: "ananya@123",
-    },
-    {
-      role: "Employee",
-      department: "IT",
-      email: "manish@hrportal.com",
-      password: "manish@123",
-    },
-  ];
-
-  const fillCredentials = (email: string, password: string) => {
-    setEmail(email);
-    setPassword(password);
-  };
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-100 flex items-center justify-center p-4">
       <div className="w-full max-w-7xl grid lg:grid-cols-2 gap-12 items-center">
