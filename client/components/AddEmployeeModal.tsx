@@ -126,7 +126,7 @@ export default function AddEmployeeModal({
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button className="bg-blue-600 hover:bg-blue-700">
+        <Button className="bg-slate-900 hover:bg-black">
           <UserPlus className="mr-2 h-4 w-4" />
           Add Employee
         </Button>
@@ -257,7 +257,7 @@ export default function AddEmployeeModal({
             <Button
               type="submit"
               disabled={isLoading}
-              className="flex-1 bg-blue-600 hover:bg-blue-700"
+              className="flex-1 bg-slate-900 hover:bg-black"
             >
               {isLoading ? "Adding..." : "Add Employee"}
             </Button>
